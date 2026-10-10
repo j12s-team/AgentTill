@@ -119,9 +119,9 @@ export function OwnerControls() {
 
   if (demo) {
     return (
-      <div className="rounded-2xl border border-white/5 bg-ink-900/80 p-5">
-        <h2 className="text-sm font-semibold text-white">Owner controls</h2>
-        <p className="mt-1 text-xs text-slate-500">
+      <div className="rounded-2xl border border-white/5 bg-ink-900 p-5">
+        <h2 className="text-lg font-semibold tracking-tight text-white">Owner controls</h2>
+        <p className="mt-1 text-sm text-slate-400">
           Pause · top-up · register agents · policy (demo)
         </p>
 
@@ -132,7 +132,7 @@ export function OwnerControls() {
               runDemoPause();
               setMsg(demoState.paused ? "Till unpaused" : "Till paused");
             }}
-            className="rounded-lg border border-white/10 bg-ink-800 px-3 py-2 text-xs font-medium text-slate-200 hover:bg-ink-700"
+            className="rounded-lg border border-white/10 bg-ink-800 px-3 py-2 text-xs font-medium text-slate-200 hover:bg-ink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400"
           >
             {demoState.paused ? "Unpause" : "Pause till"}
           </button>
@@ -140,7 +140,7 @@ export function OwnerControls() {
             <input
               value={topUp}
               onChange={(e) => setTopUp(e.target.value)}
-              className="w-24 rounded-lg border border-white/10 bg-ink-950 px-2 py-2 font-mono text-xs text-white"
+              className="w-24 rounded-lg border border-white/10 bg-ink-950 px-2 py-2 font-mono text-xs text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
             />
             <button
               type="button"
@@ -151,7 +151,7 @@ export function OwnerControls() {
                   setMsg(`Topped up $${n.toFixed(2)} USDC`);
                 }
               }}
-              className="rounded-lg bg-emerald-600/90 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-500"
+              className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-200 hover:bg-emerald-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400"
             >
               Top-up
             </button>
@@ -163,13 +163,13 @@ export function OwnerControls() {
             value={agentName}
             onChange={(e) => setAgentName(e.target.value)}
             placeholder="Agent name"
-            className="rounded-lg border border-white/10 bg-ink-950 px-3 py-2 text-xs text-white"
+            className="rounded-lg border border-white/10 bg-ink-950 px-3 py-2 text-xs text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
           />
           <input
             value={agentAddr}
             onChange={(e) => setAgentAddr(e.target.value)}
             placeholder="0x…"
-            className="rounded-lg border border-white/10 bg-ink-950 px-3 py-2 font-mono text-xs text-white"
+            className="rounded-lg border border-white/10 bg-ink-950 px-3 py-2 font-mono text-xs text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
           />
           <button
             type="button"
@@ -177,26 +177,26 @@ export function OwnerControls() {
               runDemoRegister(agentAddr, agentName);
               setMsg(`Registered ${agentName}`);
             }}
-            className="rounded-lg bg-arc-600 px-3 py-2 text-xs font-semibold text-white hover:bg-arc-500"
+            className="rounded-lg bg-arc-600 px-3 py-2 text-xs font-semibold text-white hover:bg-arc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400"
           >
             Register
           </button>
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-400 sm:grid-cols-4">
-          <div className="rounded-lg bg-ink-950/80 p-2">
+          <div className="rounded-lg border border-white/5 bg-ink-950 p-2">
             Max / pay
             <div className="font-mono text-slate-200">${demoState.maxPerPayment}</div>
           </div>
-          <div className="rounded-lg bg-ink-950/80 p-2">
+          <div className="rounded-lg border border-white/5 bg-ink-950 p-2">
             Daily cap
             <div className="font-mono text-slate-200">${demoState.dailyCap}</div>
           </div>
-          <div className="rounded-lg bg-ink-950/80 p-2">
+          <div className="rounded-lg border border-white/5 bg-ink-950 p-2">
             Session cap
             <div className="font-mono text-slate-200">${demoState.sessionCap}</div>
           </div>
-          <div className="rounded-lg bg-ink-950/80 p-2">
+          <div className="rounded-lg border border-white/5 bg-ink-950 p-2">
             Memo
             <div className="text-slate-200">
               {demoState.memoRequired ? "Required" : "Optional"}
@@ -213,9 +213,9 @@ export function OwnerControls() {
   const usdc = getUsdcAddress();
 
   return (
-    <div className="rounded-2xl border border-white/5 bg-ink-900/80 p-5">
-      <h2 className="text-sm font-semibold text-white">Owner controls</h2>
-      <p className="mt-1 text-xs text-slate-500">
+    <div className="rounded-2xl border border-white/5 bg-ink-900 p-5">
+      <h2 className="text-lg font-semibold tracking-tight text-white">Owner controls</h2>
+      <p className="mt-1 text-sm text-slate-400">
         Pause · fund (approve + fund) · withdraw · register — onchain
       </p>
 
@@ -233,7 +233,7 @@ export function OwnerControls() {
               }),
             );
           }}
-          className="rounded-lg border border-white/10 bg-ink-800 px-3 py-2 text-xs font-medium text-slate-200 hover:bg-ink-700 disabled:opacity-40"
+          className="rounded-lg border border-white/10 bg-ink-800 px-3 py-2 text-xs font-medium text-slate-200 hover:bg-ink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400 disabled:opacity-40"
         >
           Pause till
         </button>
@@ -250,7 +250,7 @@ export function OwnerControls() {
               }),
             );
           }}
-          className="rounded-lg border border-white/10 bg-ink-800 px-3 py-2 text-xs font-medium text-slate-200 hover:bg-ink-700 disabled:opacity-40"
+          className="rounded-lg border border-white/10 bg-ink-800 px-3 py-2 text-xs font-medium text-slate-200 hover:bg-ink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400 disabled:opacity-40"
         >
           Unpause
         </button>
@@ -258,7 +258,7 @@ export function OwnerControls() {
           <input
             value={topUp}
             onChange={(e) => setTopUp(e.target.value)}
-            className="w-24 rounded-lg border border-white/10 bg-ink-950 px-2 py-2 font-mono text-xs text-white"
+            className="w-24 rounded-lg border border-white/10 bg-ink-950 px-2 py-2 font-mono text-xs text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
           />
           <button
             type="button"
@@ -279,7 +279,7 @@ export function OwnerControls() {
                 }),
               );
             }}
-            className="rounded-lg bg-emerald-600/90 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-500 disabled:opacity-40"
+            className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-200 hover:bg-emerald-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400 disabled:opacity-40"
           >
             Top-up
           </button>
@@ -290,7 +290,7 @@ export function OwnerControls() {
         <input
           value={withdrawAmt}
           onChange={(e) => setWithdrawAmt(e.target.value)}
-          className="w-24 rounded-lg border border-white/10 bg-ink-950 px-2 py-2 font-mono text-xs text-white"
+          className="w-24 rounded-lg border border-white/10 bg-ink-950 px-2 py-2 font-mono text-xs text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
           placeholder="Withdraw"
         />
         <button
@@ -312,7 +312,7 @@ export function OwnerControls() {
               }),
             );
           }}
-          className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-xs font-semibold text-rose-200 hover:bg-rose-500/20 disabled:opacity-40"
+          className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-xs font-semibold text-rose-200 hover:bg-rose-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400 disabled:opacity-40"
         >
           Withdraw
         </button>
@@ -323,13 +323,13 @@ export function OwnerControls() {
           value={agentName}
           onChange={(e) => setAgentName(e.target.value)}
           placeholder="Agent name"
-          className="rounded-lg border border-white/10 bg-ink-950 px-3 py-2 text-xs text-white"
+          className="rounded-lg border border-white/10 bg-ink-950 px-3 py-2 text-xs text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
         />
         <input
           value={agentAddr}
           onChange={(e) => setAgentAddr(e.target.value)}
           placeholder="0x…"
-          className="rounded-lg border border-white/10 bg-ink-950 px-3 py-2 font-mono text-xs text-white"
+          className="rounded-lg border border-white/10 bg-ink-950 px-3 py-2 font-mono text-xs text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
         />
         <button
           type="button"
@@ -350,7 +350,7 @@ export function OwnerControls() {
               }),
             );
           }}
-          className="rounded-lg bg-arc-600 px-3 py-2 text-xs font-semibold text-white hover:bg-arc-500 disabled:opacity-40"
+          className="rounded-lg bg-arc-600 px-3 py-2 text-xs font-semibold text-white hover:bg-arc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400 disabled:opacity-40"
         >
           Register
         </button>
@@ -365,7 +365,7 @@ export function OwnerControls() {
             href={explorerTxUrl(network, txHash)}
             target="_blank"
             rel="noreferrer"
-            className="font-mono text-arc-300 hover:underline"
+            className="font-mono text-arc-300 underline-offset-2 hover:underline"
           >
             {txHash.slice(0, 10)}…{txHash.slice(-8)}
           </a>

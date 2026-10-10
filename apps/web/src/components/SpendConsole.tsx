@@ -103,11 +103,11 @@ export function SpendConsole() {
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-2xl border border-white/5 bg-ink-900/80 p-5"
+      className="rounded-2xl border border-white/5 bg-ink-900 p-5"
     >
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-white">Agent spend console</h2>
-        <span className="text-xs text-slate-500">
+        <h2 className="text-lg font-semibold tracking-tight text-white">Agent spend console</h2>
+        <span className="rounded-full border border-white/10 bg-ink-950 px-2.5 py-1 text-xs text-slate-300">
           {demo
             ? `Budget $${demoState.budget.toFixed(2)} · ${demoState.paused ? "Paused" : "Live"}`
             : tillAddress
@@ -121,7 +121,7 @@ export function SpendConsole() {
           <input
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-white/10 bg-ink-950 px-3 py-2 font-mono text-sm text-white outline-none focus:border-arc-500"
+            className="mt-1 w-full rounded-lg border border-white/10 bg-ink-950 px-3 py-2 font-mono text-sm text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
             placeholder="25.00"
           />
         </label>
@@ -130,7 +130,7 @@ export function SpendConsole() {
           <input
             value={payee}
             onChange={(e) => setPayee(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-white/10 bg-ink-950 px-3 py-2 font-mono text-sm text-white outline-none focus:border-arc-500"
+            className="mt-1 w-full rounded-lg border border-white/10 bg-ink-950 px-3 py-2 font-mono text-sm text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
           />
         </label>
       </div>
@@ -139,7 +139,7 @@ export function SpendConsole() {
         <input
           value={reason}
           onChange={(e) => setReason(e.target.value)}
-          className="mt-1 w-full rounded-lg border border-white/10 bg-ink-950 px-3 py-2 text-sm text-white outline-none focus:border-arc-500"
+          className="mt-1 w-full rounded-lg border border-white/10 bg-ink-950 px-3 py-2 text-sm text-white outline-none focus:border-arc-500 focus-visible:ring-2 focus-visible:ring-arc-400"
         />
       </label>
       {error ? <p className="mt-3 text-sm text-rose-400">{error}</p> : null}
@@ -151,7 +151,7 @@ export function SpendConsole() {
             href={explorerTxUrl(network, txHash)}
             target="_blank"
             rel="noreferrer"
-            className="font-mono text-arc-300 hover:underline"
+            className="font-mono text-arc-300 underline-offset-2 hover:underline"
           >
             {txHash.slice(0, 10)}…{txHash.slice(-8)}
           </a>
@@ -161,7 +161,7 @@ export function SpendConsole() {
       <button
         type="submit"
         disabled={paused || busy}
-        className="mt-4 w-full rounded-lg bg-arc-600 py-2.5 text-sm font-semibold text-white hover:bg-arc-500 disabled:cursor-not-allowed disabled:opacity-40"
+        className="mt-4 w-full rounded-lg bg-arc-600 py-2.5 text-sm font-semibold text-white hover:bg-arc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arc-400 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {busy ? (confirming ? "Confirming…" : "Submitting…") : "Execute payment"}
       </button>

@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { useAppState } from "@/components/AppState";
 import { arcMainnet, arcTestnet, TYPICAL_FEE_USD } from "@/config/chains";
 import { shortAddress } from "@/lib/format";
+import { LINKS, ROUTES } from "@/lib/marketing/site";
 
 export function Header() {
   const { network, setNetwork, demo } = useAppState();
@@ -21,49 +23,39 @@ export function Header() {
   // Marketing pages (/ and /lp/*) render their own BrandHeader with no wallet UI.
   if (pathname === "/" || pathname?.startsWith("/lp/")) return null;
 
+  const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-arc-400";
+  const item = `rounded-md px-2.5 py-1.5 hover:bg-white/5 hover:text-white ${focus}`;
+
   return (
     <header className="sticky top-0 z-40 border-b border-white/5 bg-ink-950/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-arc-400 to-arc-700 text-sm font-bold text-white shadow-glow">
-              AT
-            </span>
-            <span className="hidden sm:inline">AgentTill</span>
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 md:px-6">
+        <div className="flex min-w-0 items-center gap-4">
+          <Link href="/" className={`shrink-0 rounded-md ${focus}`}>
+            <Image src="/brand/agenttill-lockup-transparent.svg" alt="AgentTill" width={132} height={50} priority unoptimized />
           </Link>
-          <nav className="hidden items-center gap-1 text-sm text-slate-400 md:flex">
-            <Link href="/dashboard" className="rounded-md px-3 py-1.5 hover:bg-white/5 hover:text-white">
-              Dashboard
-            </Link>
-            <Link href="/dashboard#ledger" className="rounded-md px-3 py-1.5 hover:bg-white/5 hover:text-white">
-              Ledger
-            </Link>
-            <a
-              href="https://docs.arc.io"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-md px-3 py-1.5 hover:bg-white/5 hover:text-white"
-            >
-              Arc Docs
-            </a>
+          <nav aria-label="Primary" className="flex items-center overflow-x-auto text-sm text-slate-400">
+            <Link href="/" className={item}>Home</Link>
+            <Link href={ROUTES.judges} className={item}>Judges</Link>
+            <Link href={ROUTES.developers} className={item}>Developers</Link>
+            <a href={LINKS.repo} target="_blank" rel="noreferrer" className={item}>GitHub</a>
           </nav>
         </div>
 
         <div className="flex items-center gap-2">
           {demo && (
-            <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-xs font-medium text-amber-300">
+            <span className="hidden rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-xs font-medium text-amber-300 sm:inline">
               Demo mode
             </span>
           )}
-          <div className="flex rounded-lg border border-white/10 bg-ink-900 p-0.5 text-xs">
+          <div role="group" aria-label="Network" className="flex rounded-lg border border-white/10 bg-ink-900 p-0.5 text-xs">
             <button
               type="button"
               onClick={() => {
                 setNetwork("testnet");
                 switchChain?.({ chainId: arcTestnet.id });
               }}
-              className={`rounded-md px-2.5 py-1.5 transition ${
-                network === "testnet" ? "bg-arc-600 text-white" : "text-slate-400 hover:text-white"
+              className={`rounded-md px-2.5 py-1.5 transition ${focus} ${
+                network === "testnet" ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
               }`}
             >
               Testnet
@@ -74,8 +66,8 @@ export function Header() {
                 setNetwork("mainnet");
                 switchChain?.({ chainId: arcMainnet.id });
               }}
-              className={`rounded-md px-2.5 py-1.5 transition ${
-                network === "mainnet" ? "bg-arc-600 text-white" : "text-slate-400 hover:text-white"
+              className={`rounded-md px-2.5 py-1.5 transition ${focus} ${
+                network === "mainnet" ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
               }`}
             >
               Mainnet
@@ -88,7 +80,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => switchChain?.({ chainId: targetChain.id })}
-                  className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-2.5 py-1.5 text-xs text-rose-300"
+                  className={`rounded-lg border border-rose-500/40 bg-rose-500/10 px-2.5 py-1.5 text-xs text-rose-300 ${focus}`}
                 >
                   Switch to Arc
                 </button>
@@ -96,7 +88,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => disconnect()}
-                className="rounded-lg border border-white/10 bg-ink-800 px-3 py-1.5 font-mono text-xs text-slate-200 hover:bg-ink-700"
+                className={`rounded-lg border border-white/10 bg-ink-800 px-3 py-1.5 font-mono text-xs text-slate-200 hover:bg-ink-700 ${focus}`}
                 title={`Fees typically ${TYPICAL_FEE_USD} on Arc`}
               >
                 {shortAddress(address)}
@@ -110,7 +102,7 @@ export function Header() {
                 const c = connectors.find((x) => x.id === "injected") ?? connectors[0];
                 if (c) connect({ connector: c, chainId: targetChain.id });
               }}
-              className="rounded-lg bg-arc-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-arc-500 disabled:opacity-50"
+              className={`whitespace-nowrap rounded-lg bg-arc-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-arc-500 disabled:opacity-50 ${focus}`}
             >
               {isPending ? "Connecting…" : "Connect wallet"}
             </button>
