@@ -1,0 +1,31 @@
+import { parseAbi } from "viem";
+
+/** Read/simulate ABI for the marketing demo — mirrors packages/contracts/src/AgentTill.sol. */
+export const tillDemoAbi = parseAbi([
+  "struct Policy { uint256 maxPerPayment; uint256 dailyCap; uint256 sessionCap; bool allowlistEnabled; bool memoRequired; }",
+  "function getPolicy() view returns (Policy)",
+  "function remainingBudget() view returns (uint256)",
+  "function paused() view returns (bool)",
+  "function isPayeeAllowed(address payee) view returns (bool)",
+  "function getAgents() view returns (address[])",
+  "function dailySpent() view returns (uint256)",
+  "function paymentCount() view returns (uint256)",
+  "function spend(uint256 amount, address payee, string reason) returns (uint256 paymentId)",
+  "event PaymentExecuted(uint256 indexed paymentId, address indexed agent, address indexed payee, uint256 amount, string reason, uint256 remainingBudget)",
+  "error ZeroAddress()",
+  "error ZeroAmount()",
+  "error NotAgent()",
+  "error AgentAlreadyRegistered()",
+  "error InsufficientBudget()",
+  "error ExceedsMaxPerPayment()",
+  "error ExceedsDailyCap()",
+  "error ExceedsSessionCap()",
+  "error PayeeNotAllowed()",
+  "error MemoRequired()",
+  "error InsufficientAllowanceOrBalance()",
+  "error EnforcedPause()",
+  "error ExpectedPause()",
+  "error ReentrancyGuardReentrantCall()",
+  "error SafeERC20FailedOperation(address token)",
+  "error OwnableUnauthorizedAccount(address account)",
+]);

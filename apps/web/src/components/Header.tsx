@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { useAppState } from "@/components/AppState";
 import { arcMainnet, arcTestnet, TYPICAL_FEE_USD } from "@/config/chains";
@@ -13,7 +14,12 @@ export function Header() {
   const { disconnect } = useDisconnect();
   const { switchChain } = useSwitchChain();
 
+  const pathname = usePathname();
+
   const targetChain = network === "mainnet" ? arcMainnet : arcTestnet;
+
+  // Marketing pages (/lp/*) render their own BrandHeader with no wallet UI.
+  if (pathname?.startsWith("/lp/")) return null;
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/5 bg-ink-950/80 backdrop-blur-xl">
