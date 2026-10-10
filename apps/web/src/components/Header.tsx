@@ -18,8 +18,8 @@ export function Header() {
 
   const targetChain = network === "mainnet" ? arcMainnet : arcTestnet;
 
-  // Marketing pages (/lp/*) render their own BrandHeader with no wallet UI.
-  if (pathname?.startsWith("/lp/")) return null;
+  // Marketing pages (/ and /lp/*) render their own BrandHeader with no wallet UI.
+  if (pathname === "/" || pathname?.startsWith("/lp/")) return null;
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/5 bg-ink-950/80 backdrop-blur-xl">

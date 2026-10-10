@@ -3,7 +3,7 @@ import Link from "next/link";
 import { TrackedLink } from "./TrackedLink";
 import { LINKS, ROUTES } from "@/lib/marketing/site";
 
-type Props = { page: "judges" | "developers" };
+type Props = { page: "home" | "judges" | "developers" };
 
 export function BrandHeader({ page }: Props) {
   const item = "rounded-md px-2.5 py-1.5 hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-arc-400";

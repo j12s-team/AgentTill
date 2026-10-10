@@ -17,7 +17,9 @@ export type AnalyticsEvent =
   | "snippet_copy"
   | "framework_tab_select"
   | "api_ref_anchor_click"
-  | "cross_link_click";
+  | "cross_link_click"
+  | "home_view"
+  | "home_cta_click";
 
 export type AnalyticsProps = Record<string, string | number | boolean>;
 
