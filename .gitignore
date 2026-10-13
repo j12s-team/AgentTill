@@ -33,3 +33,7 @@ npm-debug.log*
 coverage/
 lcov.info
 dist/
+
+# Local docs (not published)
+/design/
+/DESIGN.md

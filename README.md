@@ -23,6 +23,26 @@ No OpenAI/LLM required for the core demo. Self-contained — no external agent r
 - **Canonical USDC** — ERC-20 `0x3600…0000` at **6 decimals** for app balances/transfers. Native gas is the same USDC pool at 18 decimals — the UI shows **one** ERC-20 USDC balance (never double-count).
 - Mainnet chain `5042` · Testnet `5042002` · Docs: https://docs.arc.io
 
+## Agent quickstart (viem)
+
+Agents call one function. Over policy, the call reverts with a typed error (`ExceedsDailyCap`, `PayeeNotAllowed`, …) — simulate first with `simulateContract`. Judges: [/lp/judges](https://agenttill.cjanneh.workers.dev/lp/judges) · Developers: [/lp/developers](https://agenttill.cjanneh.workers.dev/lp/developers).
+
+```ts
+import { createWalletClient, http, parseUnits, parseAbi } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { arcTestnet } from "./chains"; // chain 5042002, rpc.testnet.arc.io
+
+const till = "0xA40E8DA38760eAf987eF85CD00b28319F11c4CAD";
+const abi = parseAbi(["function spend(uint256 amount, address payee, string reason) returns (uint256)"]);
+const agent = createWalletClient({ account: privateKeyToAccount(process.env.AGENT_KEY as `0x${string}`), chain: arcTestnet, transport: http() });
+const payee = process.env.PAYEE as `0x${string}`; // allowlisted payee address
+
+const hash = await agent.writeContract({
+  address: till, abi, functionName: "spend",
+  args: [parseUnits("2.50", 6), payee, "inference: 1k tokens"], // USDC = 6 decimals
+});
+```
+
 ## Architecture
 
 ```mermaid
