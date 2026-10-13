@@ -8,6 +8,9 @@ import { SpendConsole } from "@/components/SpendConsole";
 import { OwnerControls } from "@/components/OwnerControls";
 import { TillAddressBar } from "@/components/TillAddressBar";
 import { AddressRow } from "@/components/marketing/AddressRow";
+import { BrandHeader } from "@/components/marketing/BrandHeader";
+import { MarketingFooter } from "@/components/marketing/Footer";
+import { WalletNetworkBar } from "@/components/WalletNetworkBar";
 import { TYPICAL_FEE_USD } from "@/config/chains";
 
 const usd = (n: number) => `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -25,6 +28,8 @@ export default function DashboardPage() {
   const networkLabel = network === "mainnet" ? "Arc Mainnet · 5042" : "Arc Testnet · 5042002";
 
   return (
+    <>
+    <BrandHeader page="dashboard" />
     <div className="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6 md:py-12">
       <section aria-labelledby="dash-h1">
         <div className="flex flex-wrap items-start justify-between gap-4">
@@ -56,6 +61,9 @@ export default function DashboardPage() {
               Typical fee {TYPICAL_FEE_USD}
             </span>
           </div>
+        </div>
+        <div className="mt-5">
+          <WalletNetworkBar />
         </div>
         <div className="mt-5 max-w-2xl">
           <AddressRow network={network} address={tillAddress ?? null} page="dashboard" />
@@ -114,5 +122,7 @@ export default function DashboardPage() {
         <Ledger payments={demoState.payments} network={network} />
       </section>
     </div>
+    <MarketingFooter />
+    </>
   );
 }
